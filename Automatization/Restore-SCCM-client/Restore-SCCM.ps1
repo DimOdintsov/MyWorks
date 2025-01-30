@@ -178,5 +178,16 @@ try {
     Write-Log "!!!!!!!!!!!!!Errors while running ClientHealth.ps1: $_"
 }
 # Completing the script
-
+if($a=Get-ScheduledTask -TaskName "SCCMTaskFullRepair" -ErrorAction SilentlyContinue | Select-Object -Last 1)
+    {
+    $a | Disable-ScheduledTask -TaskName 'SCCMTaskFullRepair'
+    $a | Unregister-ScheduledTask -Confirm:$false
+    Write-Log "!!!!!!!!!!!!!SCCMTaskFileRepair was disabled and deleted"
+    }
+    else{
+        Write-Log "!!!!!!!!!!!!!SCCMTaskFullRepair the task was not found"
+    }
+Remove-Item -Path "C:\Windows\Temp\SCCMTaskFullRepair.xml" -Force
+Remove-Item -Path "C:\Windows\Temp\Client\" -Force
+Write-Log "!!!!!!!!!!!!!SCCMTaskFullRepair.xml was deleted"
 Write-Log "Script execution completed."

@@ -12,7 +12,9 @@ Write-Log "Getting started with the recovery procedure for SCCM clients"
 Write-Log "-------------Important info - each host have a personal log file. C:\Windows\Temp\ReinstallSCCM"
 
 #Get hosts from collection
-$hostsContent = (Get-CMDevice -CollectionId ****).Name
+$hostsContent0 = (Get-CMDevice -CollectionId ****).Name
+$hostsContent1 = (Get-CMDevice -CollectionId ****).Name
+$hostsContent = ($hostsContent0 + $hostsContent1) | Select-Object -Unique
 
 #It is important to do Set-Location C because when he is in the module he cannot look into the balls normally
 Set-Location C:
@@ -32,6 +34,8 @@ foreach($in in $hostslist){
         Copy-Item -Path "\\yourshare.domain.com\Folder\ForSCCM\RestoreSCCM.ps1" -Destination "\\$($in)\C$\Windows\Temp\" -force
         Start-Sleep 1
         Copy-Item "\\yourshare.domain.com\Folder\ForSCCM\SCCMTaskFullRepair.xml" "\\$($in)\C$\Windows\Temp\" -force
+        Start-Sleep 1
+        Copy-Item -Path "\\yourshare.domain.com\Folder\ForSCCM\Client\" -Recurse -Destination "\\$($in)\C$\Windows\Temp\" -force
         Start-Sleep 1
         Write-Log "data was copied successfully to $in"
         }
