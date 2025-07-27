@@ -1,1 +1,1 @@
-#заметки
+#here is my scripts repo
