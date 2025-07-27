@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                background-color:aliceblue;
+            }
+            .custom-container{
+                margin-left: 20px;
+            }
+            .card{
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+<body>
+<div class="container custom-container" style="min-height: 50vh;">
+    <div class="card w-100" style="max-width: 800px;">
+        <div class="card-body">
+            <h4 class="card-title text-left mb-4">Передача параметра в PowerShell -Get test</h4>
+            <form action="/run" method="post">
+                <label for="input_string">Введите строку:</label>
+                <input type="text" id="input_string" name="input_string" required>
+                <button type = "submit" class="btn btn-primary w-30">Отправить</button>
+            </form>
+            <h4 class="card-title text-left mb-4">Передача параметра в PowerShell - Get dlp</h4>
+            <form action="/run1" method="post">
+                <label for="input_string">Введите строку:</label>
+                <input type="text" id="input_string" name="input_string" required>
+                <button type = "submit" class="btn btn-primary w-20">Отправить</button>
+            </form>
+            <h4 class="card-title text-left mb-4">Get UPN, требуется вписать полный путь до файла txt. Пример: C:\TEST\list.txt. Пользователей вносим в формате sam d.odintsov</h4>
+            <form action="/upn" method="post">
+                <label for="input_string">Введите строку:</label>
+                <input type="text" id="input_string" name="input_string" required>
+                <button type = "submit" class="btn btn-primary w-20">Отправить</button>
+            </form>
+            <h1> </h1>
+            <form action="/about" method="get">
+                <button type = "submit" class="btn btn-primary w-20">About this page</button>
+            </form>
+            <h1> </h1>
+            <form action="/" method="get">
+                <button type = "submit" class="btn btn-primary w-20">Выход</button>
+            </form>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
