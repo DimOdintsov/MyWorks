@@ -1,5 +1,5 @@
 param(
-  [string]$AppName = 'postman'
+  [string]$AppName
 )
 
 function Get-InteractiveUserSID {
@@ -28,8 +28,6 @@ $items = Get-ItemProperty -Path $roots -ErrorAction SilentlyContinue | Where-Obj
 foreach ($u in $items) {
   $line = if ($u.QuietUninstallString) { $u.QuietUninstallString } else { $u.UninstallString }
   if (-not $line) { continue }
-
-  # Разбор "exe + args"
   if ($line -match '^\s*"([^"]+)"\s*(.*)$') {
     $exe  = $matches[1]
     $args = $matches[2].Trim()
@@ -38,7 +36,6 @@ foreach ($u in $items) {
     $exe   = $parts[0]
     $args  = if ($parts.Count -gt 1) { $parts[1] } else { '' }
   }
-  # MSI: /I -> /X и тихий режим
   if ([IO.Path]::GetFileName($exe) -imatch '^msiexec(\.exe)?$') {
     $args = $args -replace '(^|\s)/i(\s|$)',' /x$2'
     if ($args -notmatch '(/qn|/quiet)') { $args += ' /qn /norestart' }
